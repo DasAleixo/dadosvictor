@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Victor Hugo Aleixo Silva — Analista de Inteligência, BI e dados. Portfólio com projetos em churn, metas e dashboards." />
+  <title>Victor Aleixo — Portfólio | Dados &amp; BI</title>
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0c1222;
+      --muted: #5c6578;
+      --line: #e2e8f0;
+      --accent: #0d3d5c;
+      --accent-bright: #1a6fa3;
+      --surface: #ffffff;
+      --hero: linear-gradient(145deg, #051a2e 0%, #0a2840 38%, #0d3d5c 72%, #0f4a6e 100%);
+      --card-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--ink);
+      background: #eef2f7;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 12px rgba(13, 61, 92, 0.06);
+    }
+
+    .nav-brand {
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem 1.1rem;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-bright);
+    }
+
+    .nav-cta {
+      font-family: "Outfit", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1a6fa3, #0d3d5c);
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+
+    .nav-cta:hover {
+      filter: brightness(1.06);
+    }
+
+    .hero {
+      background: var(--hero);
+      color: #ffffff;
+      padding: 3rem 1.5rem 3.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(26, 111, 163, 0.35), transparent 55%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 70% at 100% 100%, rgba(0, 0, 0, 0.35), transparent 50%),
+        radial-gradient(ellipse 70% 50% at 0% 80%, rgba(0, 0, 0, 0.28), transparent 45%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(140px, 240px);
+      gap: 1.75rem 2.25rem;
+      align-items: center;
+      background: linear-gradient(155deg, rgba(4, 22, 38, 0.94), rgba(8, 40, 62, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      padding: 2rem 2rem 2.15rem 2.15rem;
+      box-shadow:
+        0 4px 0 rgba(255, 255, 255, 0.04) inset,
+        0 28px 56px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem;
+    }
+
+    .hero-logo-matte {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto;
+      aspect-ratio: 1;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    /* PNG com traço escuro em fundo branco: fundo “some” no painel; monograma claro sobre o azul */
+    .hero-logo-matte img {
+      width: 82%;
+      height: auto;
+      max-height: 176px;
+      object-fit: contain;
+      filter: invert(1);
+      mix-blend-mode: screen;
+      opacity: 0.96;
+    }
+
+    @supports not (backdrop-filter: blur(1px)) {
+      .hero-panel {
+        background: linear-gradient(155deg, #061f33, #0a3048);
+      }
+    }
+
+    .hero h1 {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(2rem, 5vw, 2.65rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      color: #ffffff;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-role {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+      font-weight: 600;
+      color: #bfe6ff;
+      margin-top: 0.65rem;
+      line-height: 1.35;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-lead {
+      margin-top: 1.35rem;
+      font-size: 1.08rem;
+      max-width: 46ch;
+      color: #f2f7fc;
+      font-weight: 500;
+      line-height: 1.58;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.85rem;
+    }
+
+    .hero-panel .btn-primary {
+      background: #ffffff;
+      color: #062238 !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-panel .btn-primary:hover {
+      background: #f0f7fc;
+    }
+
+    .hero-panel .btn-outline {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+    }
+
+    .hero-panel .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+
+    .btn {
+      font-family: "Outfit", sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--accent) !important;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 3.25rem 0;
+    }
+
+    section:nth-child(even) {
+      background: var(--surface);
+    }
+
+    .section-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    h2.section-h2 {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-text {
+      color: var(--muted);
+      max-width: 65ch;
+    }
+
+    .about-text strong {
+      color: var(--ink);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(13, 61, 92, 0.06);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 12px 36px rgba(13, 61, 92, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .project-thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      line-height: 1.3;
+    }
+
+    .project-thumb.churn {
+      background: linear-gradient(145deg, #0f4c75, #1b6ca8, #2e8bc0);
+    }
+
+    .project-thumb.metas {
+      background: linear-gradient(145deg, #0d3d5c, #155a82, #1a6fa3);
+    }
+
+    .project-body {
+      padding: 1.35rem 1.4rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-body h3 {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .project-body p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--accent);
+      border: 1px solid #d0dce8;
+    }
+
+    .project-link {
+      font-family: "Outfit", sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-bright);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .pill {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--card-bg);
+      color: var(--accent);
+      border: 1px solid var(--line);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      border-left: 3px solid var(--accent-bright);
+    }
+
+    .cert-item-text strong {
+      display: block;
+      font-family: "Outfit", sans-serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+
+    .cert-item-text span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      display: block;
+    }
+
+    .cert-item a {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1a6fa3, #0d3d5c);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .cert-item a:hover {
+      filter: brightness(1.08);
+    }
+
+    .cert-item.no-link .cert-item-text {
+      flex: 1;
+    }
+
+    .contact-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .contact-list a {
+      color: var(--accent-bright);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.5rem;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+      background: #e8ecf2;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 720px) {
+      .hero-panel {
+        grid-template-columns: 1fr;
+        padding: 1.75rem 1.5rem 2rem;
+        text-align: center;
+      }
+
+      .hero-logo {
+        order: -1;
+        padding-bottom: 0.25rem;
+      }
+
+      .hero-logo-matte {
+        max-width: 200px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-lead {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="nav-brand" href="#">Victor Aleixo</a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#stack">Stack</a>
+      <a href="#credenciais">Credenciais</a>
+      <a href="#contato">Contato</a>
+      <a href="https://github.com/dasaleixo" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+    <a class="nav-cta" href="curriculo-victor-hugo-aleixo.html">Currículo completo</a>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <h1>Victor Hugo Aleixo Silva</h1>
+          <p class="hero-role">Analista de Inteligência de Vendas &amp; Business Intelligence</p>
+          <p class="hero-lead">
+            Dados, modelagem e dashboards para vendas, metas e planejamento — com foco em decisões claras e entregas reprodutíveis.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+            <a class="btn btn-outline" href="curriculo-victor-hugo-aleixo.html">Abrir currículo (web / PDF)</a>
+            <a class="btn btn-outline" href="https://linkedin.com/in/dadosvictor" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+        <div class="hero-logo">
+          <div class="hero-logo-matte">
+            <img src="logo-landing.png" width="512" height="512" alt="Logotipo — monograma VA" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap">
+      <p class="section-title">Sobre</p>
+      <h2 class="section-h2">Resumo profissional</h2>
+      <div class="about-text">
+        <p>
+          Profissional de <strong>análise de dados</strong> com experiência em <strong>modelagem</strong>, <strong>BI</strong> e <strong>automação</strong> aplicadas a vendas e planejamento.
+          Atuo no <strong>desdobramento de metas</strong>, <strong>remuneração variável</strong>, <strong>orçamento</strong> e <strong>projeção de demanda</strong>, conectando indicadores a dashboards e bases corporativas.
+        </p>
+        <p style="margin-top:1rem">
+          Stack principal: <strong>Power BI</strong> (DAX, Power Query/M), <strong>Python</strong>, <strong>R</strong>, <strong>SQL</strong> e <strong>VBA</strong>.
+          <strong>Inglês B2</strong> (EF SET). Cursando <strong>Gestão da TI</strong> na FATEC-SP (Jundiaí).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <p class="section-title">Portfólio</p>
+      <h2 class="section-h2">Projetos em destaque</h2>
+      <p class="about-text" style="margin-bottom:1.75rem">
+        Aplicações públicas em <strong>GitHub Pages</strong> que mostram BI, ML e temas alinhados ao meu dia a dia analítico.
+      </p>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-thumb churn">Previsão de churn com IA</div>
+          <div class="project-body">
+            <h3>Painel Churn — IA para retenção</h3>
+            <p>
+              Painel interativo com <strong>Random Forest</strong> (scikit-learn): probabilidade de churn, filtros por faixa de risco, KPIs e ranking dos clientes mais críticos.
+              Dados simulados para demonstração de fluxo completo de <strong>ML + BI</strong>.
+            </p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>scikit-learn</span>
+              <span>Random Forest</span>
+              <span>BI</span>
+              <span>GitHub Pages</span>
+            </div>
+            <a class="project-link" href="https://dasaleixo.github.io/analise_churn/" target="_blank" rel="noopener noreferrer">
+              Abrir projeto
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb metas">Desdobramento de metas</div>
+          <div class="project-body">
+            <h3>Desdobramento de metas</h3>
+            <p>
+              Aplicação web alinhada à prática de <strong>planejamento comercial</strong>: visualização e lógica de desdobramento de metas (demonstração técnica no navegador).
+              Complementa a experiência com <strong>inteligência de vendas</strong> e performance.
+            </p>
+            <div class="project-tags">
+              <span>Web</span>
+              <span>Planejamento</span>
+              <span>Metas</span>
+              <span>GitHub Pages</span>
+            </div>
+            <a class="project-link" href="https://dasaleixo.github.io/desdobramento_metas/" target="_blank" rel="noopener noreferrer">
+              Abrir projeto
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <p class="section-title">Competências</p>
+      <h2 class="section-h2">Stack &amp; temas</h2>
+      <div class="pills">
+        <span class="pill">Análise de dados</span>
+        <span class="pill">Planejamento estratégico</span>
+        <span class="pill">Orçamento &amp; cenários</span>
+        <span class="pill">Modelagem de dados</span>
+        <span class="pill">ETL / Pipelines</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">DAX</span>
+        <span class="pill">Power Query (M)</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Python</span>
+        <span class="pill">R</span>
+        <span class="pill">Excel / VBA</span>
+        <span class="pill">Automação</span>
+        <span class="pill">Machine Learning</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="credenciais">
+    <div class="wrap">
+      <p class="section-title">Certificações</p>
+      <h2 class="section-h2">Credenciais verificáveis</h2>
+      <p class="about-text" style="margin-bottom:1.25rem">
+        Principais certificações com link direto para o emissor. <strong>FGV</strong> (BI, Excel, SQL, Ciência de Dados) consta no <a href="https://linkedin.com/in/dadosvictor" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+      </p>
+      <div class="certs-grid">
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>Azure Fundamentals (AZ-900)</strong>
+            <span>Microsoft Learn</span>
+          </div>
+          <a href="https://learn.microsoft.com/pt-br/users/victorhugoaleixosilva-7684/credentials/6c8b1d5144f3dd03" target="_blank" rel="noopener noreferrer" aria-label="Credencial AZ-900" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>Azure AI Fundamentals (AI-900)</strong>
+            <span>Credly · Microsoft</span>
+          </div>
+          <a href="https://www.credly.com/badges/807c78a0-a126-47af-bda7-3c272853a0a5/linked_in_profile" target="_blank" rel="noopener noreferrer" aria-label="Credencial AI-900" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>Cloud Computing Foundations</strong>
+            <span>Google Skills</span>
+          </div>
+          <a href="https://www.skills.google/public_profiles/de5da6a2-69a3-448e-bf63-c81b5a62d02c/badges/2746317?utm_medium=social&amp;utm_source=linkedin&amp;utm_campaign=ql-social-share" target="_blank" rel="noopener noreferrer" aria-label="Credencial Google" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>Data Analytics Essentials</strong>
+            <span>Cisco · Credly</span>
+          </div>
+          <a href="https://www.credly.com/badges/051c0224-89b4-45e8-953d-16bdc22b6d1d/linked_in_profile" target="_blank" rel="noopener noreferrer" aria-label="Credencial Cisco" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>IBM Data Analyst — Career</strong>
+            <span>Cognitive Class</span>
+          </div>
+          <a href="https://cognitiveclass.ai/certificates/28db5530-4e81-4406-90d9-877001f48512" target="_blank" rel="noopener noreferrer" aria-label="Credencial IBM Analyst" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>IBM Data Science Foundations (L2)</strong>
+            <span>Credly</span>
+          </div>
+          <a href="https://www.credly.com/badges/10289839-a323-4f75-976e-3eef1485aa5d/linked_in_profile" target="_blank" rel="noopener noreferrer" aria-label="Credencial IBM DS" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item-text">
+            <strong>EF SET — 53/100 (B2 CEFR)</strong>
+            <span>Inglês · certificado online</span>
+          </div>
+          <a href="https://cert.efset.org/en/7Gjg8b" target="_blank" rel="noopener noreferrer" aria-label="Certificado EF SET" title="Ver credencial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+        </div>
+        <div class="cert-item no-link">
+          <div class="cert-item-text">
+            <strong>FGV</strong>
+            <span>BI · Excel avançado · SQL · Ciência de Dados — detalhes no LinkedIn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <p class="section-title">Contato</p>
+      <h2 class="section-h2">Vamos conversar</h2>
+      <div class="contact-block">
+        <ul class="contact-list" style="padding:0">
+          <li><strong>E-mail:</strong> <a href="mailto:contato.victorzmr@gmail.com">contato.victorzmr@gmail.com</a></li>
+          <li><strong>Telefone:</strong> <a href="tel:+5511953038492">(11) 95303-8492</a></li>
+          <li><strong>Local:</strong> Várzea Paulista, SP</li>
+          <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/dadosvictor" target="_blank" rel="noopener noreferrer">linkedin.com/in/dadosvictor</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/dasaleixo" target="_blank" rel="noopener noreferrer">github.com/dasaleixo</a></li>
+        </ul>
+        <div>
+          <p class="about-text" style="margin-bottom:1rem">
+            Para <strong>currículo detalhado</strong> (experiência, formação, cursos e PDF), abra a página dedicada.
+          </p>
+          <a class="btn btn-primary" href="curriculo-victor-hugo-aleixo.html" style="color:var(--accent) !important;border:1px solid var(--line)">Ver currículo completo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Victor Hugo Aleixo Silva · Portfólio · Dados &amp; BI</p>
+  </footer>
+</body>
+</html>
